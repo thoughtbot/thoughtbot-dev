@@ -35,7 +35,7 @@ end
 
 ## Capybara Selectors
 
-- Use semantic selectors (`:label`, `:button`, `:link`, `:field`) over CSS selectors.
+- **Always reach for semantic selectors first** (`:label`, `:button`, `:link`, `:field`). Only fall back to CSS selectors when no semantic selector exists.
 - Locate elements by accessible names and descriptions, not CSS classes or IDs.
 - Never use multiple separate `has_css?` calls with OR logic — combine with CSS comma syntax or use Capybara built-in selectors.
 
@@ -44,12 +44,14 @@ end
 page.has_css?("label[for='#{id}']", text: name) ||
   page.has_css?("label:has(##{id})", text: name)
 
-# Good — combined selector
+# Acceptable — combined CSS selector (use only when no semantic selector exists)
 page.has_css?("label[for='#{id}'], label:has(##{id})", text: name)
 
-# Best — semantic selector
-page.has_selector?(:label, name, for: id)
+# Default choice — semantic selector (always prefer this)
+page.has_selector(:label, name, for: id)
 ```
+
+**Rule of thumb:** If you're writing `has_css?` in a Capybara test, stop and check whether a semantic selector (`:label`, `:button`, `:link`, `:field`) can do the job. It almost always can.
 
 ## Test Performance
 

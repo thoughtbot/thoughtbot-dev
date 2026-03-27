@@ -51,8 +51,8 @@ If you find something you don't understand mid-refactor, stop. If you've been us
 
 ## Agent Behavior
 
-1. Before refactoring, explicitly check each gate and state the result.
-2. If any gate fails, state which one and what to do instead.
+1. Before refactoring, explicitly check ALL 6 gates and state each result — even if an earlier gate already failed. Multiple gates may fail simultaneously, and the user needs the full picture to decide what to address first.
+2. If any gate fails, state which one(s) and what to do instead.
 3. One refactor at a time. Commit between each.
 4. Use small, behavior-preserving steps. Each step should be independently safe.
 
