@@ -1,0 +1,60 @@
+#!/bin/bash
+set -euo pipefail
+
+# thoughtbot-dev sync script
+# Pulls latest skill content from source plugin repos into this plugin.
+#
+# Source repos:
+#   thoughtbot/atomic-commits-plugin → skills/atomic-commits/ + hooks/
+#   thoughtbot/rails-audit-thoughtbot → skills/code-audit/
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+TEMP_DIR=$(mktemp -d)
+
+cleanup() {
+  rm -rf "$TEMP_DIR"
+}
+trap cleanup EXIT
+
+echo "==> Syncing from thoughtbot/atomic-commits-plugin..."
+gh repo clone thoughtbot/atomic-commits-plugin "$TEMP_DIR/atomic-commits-plugin" -- --depth 1 --quiet
+
+mkdir -p "$PLUGIN_ROOT/skills/atomic-commits"
+mkdir -p "$PLUGIN_ROOT/hooks"
+
+cp "$TEMP_DIR/atomic-commits-plugin/skills/atomic-commits/SKILL.md" \
+   "$PLUGIN_ROOT/skills/atomic-commits/SKILL.md"
+cp "$TEMP_DIR/atomic-commits-plugin/hooks/check-diff-size.sh" \
+   "$PLUGIN_ROOT/hooks/check-diff-size.sh"
+chmod +x "$PLUGIN_ROOT/hooks/check-diff-size.sh"
+
+echo "    ✓ skills/atomic-commits/SKILL.md"
+echo "    ✓ hooks/check-diff-size.sh"
+
+echo "==> Syncing from thoughtbot/rails-audit-thoughtbot..."
+gh repo clone thoughtbot/rails-audit-thoughtbot "$TEMP_DIR/rails-audit-thoughtbot" -- --depth 1 --quiet
+
+mkdir -p "$PLUGIN_ROOT/skills/code-audit/references"
+mkdir -p "$PLUGIN_ROOT/skills/code-audit/agents"
+
+cp "$TEMP_DIR/rails-audit-thoughtbot/SKILL.md" \
+   "$PLUGIN_ROOT/skills/code-audit/SKILL.md"
+
+for f in "$TEMP_DIR/rails-audit-thoughtbot/references/"*; do
+  cp "$f" "$PLUGIN_ROOT/skills/code-audit/references/"
+  echo "    ✓ skills/code-audit/references/$(basename "$f")"
+done
+
+for f in "$TEMP_DIR/rails-audit-thoughtbot/agents/"*; do
+  cp "$f" "$PLUGIN_ROOT/skills/code-audit/agents/"
+  echo "    ✓ skills/code-audit/agents/$(basename "$f")"
+done
+
+echo ""
+echo "==> Sync complete."
+echo ""
+echo "Next steps:"
+echo "  1. Review the diff: git diff"
+echo "  2. Check if blog post promotion sections need updating"
+echo "  3. Commit: git add -A && git commit -m 'chore: sync from source repos'"
