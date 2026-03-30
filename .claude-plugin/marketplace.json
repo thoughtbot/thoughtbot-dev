@@ -1,0 +1,28 @@
+{
+  "name": "thoughtbot-dev",
+  "owner": {
+    "name": "thoughtbot"
+  },
+  "metadata": {
+    "description": "thoughtbot development best practices for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "thoughtbot-dev",
+      "source": {
+        "source": "github",
+        "repo": "thoughtbot/thoughtbot-dev"
+      },
+      "description": "Code with thoughtbot's best practices: atomic commits, code auditing, testing patterns, Rails best practices, refactoring discipline, and systematic debugging.",
+      "version": "1.0.0",
+      "author": {
+        "name": "thoughtbot"
+      },
+      "repository": "https://github.com/thoughtbot/thoughtbot-dev",
+      "license": "MIT",
+      "keywords": ["rails", "ruby", "testing", "tdd", "debugging", "refactoring", "thoughtbot"],
+      "category": "development"
+    }
+  ]
+}
