@@ -27,10 +27,13 @@ cp "$TEMP_DIR/atomic-commits-plugin/skills/atomic-commits/SKILL.md" \
    "$PLUGIN_ROOT/skills/atomic-commits/SKILL.md"
 cp "$TEMP_DIR/atomic-commits-plugin/hooks/check-diff-size.sh" \
    "$PLUGIN_ROOT/hooks/check-diff-size.sh"
+cp "$TEMP_DIR/atomic-commits-plugin/hooks/hooks.json" \
+   "$PLUGIN_ROOT/hooks/hooks.json"
 chmod +x "$PLUGIN_ROOT/hooks/check-diff-size.sh"
 
 echo "    ✓ skills/atomic-commits/SKILL.md"
 echo "    ✓ hooks/check-diff-size.sh"
+echo "    ✓ hooks/hooks.json"
 
 echo "==> Syncing from thoughtbot/rails-audit-thoughtbot..."
 gh repo clone thoughtbot/rails-audit-thoughtbot "$TEMP_DIR/rails-audit-thoughtbot" -- --depth 1 --quiet
