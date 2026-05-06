@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "thoughtbot development best practices for Claude Code",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "plugins": [
     {
@@ -15,7 +15,7 @@
         "repo": "thoughtbot/thoughtbot-dev"
       },
       "description": "Code with thoughtbot's best practices: atomic commits, code auditing, testing patterns, Rails best practices, refactoring discipline, and systematic debugging.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "thoughtbot"
       },

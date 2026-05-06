@@ -1,7 +1,7 @@
 {
   "name": "thoughtbot-dev",
   "description": "Code with thoughtbot's best practices in mind. Atomic commits, code auditing, testing patterns, Rails best practices, refactoring discipline, and systematic debugging.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "thoughtbot"
   },
