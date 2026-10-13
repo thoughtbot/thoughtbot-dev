@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This repo is deprecated. The skills have been moved to https://github.com/thoughtbot/skills
+
 # thoughtbot-dev
 
 Code with thoughtbot's best practices in mind. Atomic commits, code auditing, testing patterns, Rails best practices, refactoring discipline, and systematic debugging.
